@@ -1,0 +1,17 @@
+[package]
+name = "safe_rust_cpp_ffi"
+version = "0.1.0"
+authors = ["Elijah Rivera <eerivera@mit.edu>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fakify_proc_macro = {path = "./fakify_proc_macro"}
+fakeptr = {path = "./fakeptr"}
+
+[build-dependencies]
+cc = "1.0"
+
+[profile.dev]
+incremental=false

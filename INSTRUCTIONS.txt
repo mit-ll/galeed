@@ -1,0 +1,36 @@
+Installation:
+
+<TODO: create a master build script>
+
+Install our custom LLVM with the normal instructions.
+We hardcoded the name of the structs we were transforming (“MyStruct”). One would need to change to the appropriate struct names presumably before building LLVM, or modify it to accept additional parameters from C++ annotations.
+
+Install Rust using the custom LLVM installation with otherwise normal instructions.  
+
+<TODO -- confirm with current directory set up that Rust builds against our LLVM as normal>
+
+Install libmpk 
+ 
+Source code modifications to use fake pointers:
+
+C++
+
+There’s a header that needs to be generated and then included, currently by hand (future work to autogenerate with cbindgen). Example: safe-rust-cpp-ffi/fake_ptr/src/libfake_ptr.h
+
+No actual changes to any .cpp files, except for the header include
+
+Rust
+
+Macros for all of the FFI function generation must be included at the top, seen here: safe-rust-cpp-ffi/fake_ptr/src/main.rs
+At every call site where one wishes to send an object across the FFI boundary, one must convert that object to a FakePtr manually, and then recover it afterwards. An example can also be found at the location above. The example is complicated by timing instrumentation, which can be safely committed.  
+ 
+Running:
+
+build.rs
+Cargo needs to be told to compile the C++ file a certain way, see safe-rust-cpp-ffi/fake_ptr/build.rs (just the build_cpp() function, the other two are only for comparison/benchmarking)
+
+safe-rust-cpp-ffi/fake_ptr/build.sh has the incantation needed to build the final binary. This is where we pass the fakeptr flag to LLVM.
+
+Firefox:
+
+Build as per standard Mozilla instructions.  

@@ -1,0 +1,10 @@
+error: reached the type-length limit while instantiating `D::matches::$CLOSURE`
+  --> $DIR/issue-22638.rs:53:5
+   |
+LL |     pub fn matches<F: Fn()>(&self, f: &F) {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: consider adding a `#![type_length_limit="30408681"]` attribute to your crate
+
+error: aborting due to previous error
+

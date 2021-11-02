@@ -1,0 +1,13 @@
+[package]
+name = "mpk_malloc"
+version = "0.1.0"
+authors = ["Elijah Rivera <eerivera@csail.mit.edu>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jemallocator = "0.3.2"
+
+[build-dependencies]
+cc = "1.0"
